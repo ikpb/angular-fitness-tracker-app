@@ -16,5 +16,10 @@ a:active {
 }
 .navItems {
   list-style: none;
-  padding: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-caption {
+  display: inline-block;
+  padding-left: 7px;
 }

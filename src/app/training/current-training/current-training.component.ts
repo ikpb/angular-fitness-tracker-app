@@ -39,7 +39,6 @@ timer;
     dialogRef.afterClosed().subscribe(result=>{
       if(!result){
         this.trainingService.cancelExercise(this.progress);
-        console.log(this.trainingService.getPastExercies());
       }else{
         this.startOrResumeTimer();
       }

@@ -18,7 +18,7 @@ export class TrainingService{
     constructor(private db:AngularFirestore, private uiService: UIService){}
 
     fetchAvailableExercises(){
-        this.uiService.loadingStateChanged.next(true)
+    this.uiService.loadingStateChanged.next(true)
       this.fbSubs.push(this.db
         .collection('availableExercises')
         .snapshotChanges()
@@ -34,9 +34,10 @@ export class TrainingService{
       });
     })
     ).subscribe((exercises: Exercise[])=>{
+        this.uiService.loadingStateChanged.next(false)
         this.availableExercises = exercises;
         this.exercisesChanged.next([...this.availableExercises]);
-        this.uiService.loadingStateChanged.next(false)
+        
     })
       )}
     startExercise(selectedId: string){
@@ -62,12 +63,10 @@ export class TrainingService{
         return{...this.runningExercise};
     }
     fetchPastExercies(){
-        this.uiService.loadingStateChanged.next(true)
         this.fbSubs.push(this.db.collection('finishedExercises')
         .valueChanges()
         .subscribe((exercises: Exercise[])=> {
             this.finishedExercisesChanged.next(exercises);
-            this.uiService.loadingStateChanged.next(true)
         }));
     }
     private addDataToDatabase(exercise: Exercise){

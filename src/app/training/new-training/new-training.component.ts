@@ -14,16 +14,16 @@ import { UIService } from 'src/app/shared/ui.service';
 })
 export class NewTrainingComponent implements OnInit, OnDestroy {
 exercises: Exercise[];
-exerciseSubscription: Subscription;
+private exerciseSubscription: Subscription;
 
   constructor(private trainingService: TrainingService, private uiService: UIService) { }
 
-  isLoading = false;
-  loadingSubs: Subscription;
+  isLoading = true;
+  private loadingSubs: Subscription;
 
   ngOnInit(): void {
-    this.loadingSubs = this.uiService.loadingStateChanged.subscribe(loadingState=> {
-      this.isLoading = loadingState;
+    this.loadingSubs = this.uiService.loadingStateChanged.subscribe(isloadingState=> {
+      this.isLoading = isloadingState;
     })
     this.exerciseSubscription = this.trainingService.exercisesChanged.subscribe(exercies => (this.exercises = exercies));
    this.trainingService.fetchAvailableExercises();

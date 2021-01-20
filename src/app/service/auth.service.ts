@@ -5,8 +5,7 @@ import { AuthData } from '../model/auth-data.model';
 import { Injectable, resolveForwardRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { TrainingService } from './training.service';
-import { MatSnackBar } from'@angular/material/snack-bar' 
+import { TrainingService } from './training.service'; 
 import { UIService } from '../shared/ui.service';
  
 @Injectable()
@@ -17,7 +16,6 @@ export class AuthService {
   constructor(private router: Router, 
     private afAuth: AngularFireAuth, 
     private trainingService: TrainingService,
-    private snackBar: MatSnackBar,
     private uiService: UIService){}
 
   initAuthListener(){

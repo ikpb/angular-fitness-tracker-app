@@ -26,7 +26,7 @@ private exerciseSubscription: Subscription;
       this.isLoading = isloadingState;
     })
     this.exerciseSubscription = this.trainingService.exercisesChanged.subscribe(exercies => (this.exercises = exercies));
-   this.trainingService.fetchAvailableExercises();
+   this.fetchExercises();
   }
   onStartNewWorkout(form: NgForm){
     this.trainingService.startExercise(form.value.exercise);
@@ -34,5 +34,8 @@ private exerciseSubscription: Subscription;
   ngOnDestroy(){
     this.exerciseSubscription.unsubscribe();
     this.loadingSubs.unsubscribe();
+  }
+  fetchExercises(){
+    this.trainingService.fetchAvailableExercises();
   }
 }

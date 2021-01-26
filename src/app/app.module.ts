@@ -19,7 +19,6 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
-import { TrainingModule} from 'src/app/training/training.module';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 @NgModule({
@@ -40,9 +39,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-  
     AuthModule,
-    TrainingModule
     
     
   ],

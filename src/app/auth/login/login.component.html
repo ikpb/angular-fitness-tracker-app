@@ -25,7 +25,8 @@
             <mat-error *ngIf="password.errors && password.errors.required">Field must not be empty</mat-error>
             <mat-hint>Please enter your password</mat-hint>
         </mat-form-field>
-        <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Submit</button>
+        <button *ngIf="!isLoading" mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Submit</button>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
         
     </form>
 </section>

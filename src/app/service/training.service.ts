@@ -25,13 +25,13 @@ export class TrainingService{
         .pipe(
           map(docArray =>{
             return docArray.map( doc =>{ 
-                throw(new Error())
-        //       return {
-        //         id: doc.payload.doc.id,
-        //         name: doc.payload.doc.data()['name'],
-        //         duration: doc.payload.doc.data()['duration'],
-        //         calories: doc.payload.doc.data()['calories']
-        // };
+                // throw(new Error())
+              return {
+                id: doc.payload.doc.id,
+                name: doc.payload.doc.data()['name'],
+                duration: doc.payload.doc.data()['duration'],
+                calories: doc.payload.doc.data()['calories']
+        };
       });
     })
     ).subscribe((exercises: Exercise[])=>{

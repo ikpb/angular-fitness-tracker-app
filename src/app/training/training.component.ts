@@ -17,7 +17,9 @@ exerciseSubscription: Subscription;
     });
   }
   ngOnDestroy(){
-
+    if(this.exerciseSubscription){
+      this.exerciseSubscription.unsubscribe();
+    }
   }
 
 }

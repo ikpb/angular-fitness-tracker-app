@@ -2,26 +2,31 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { UIService } from 'src/app/shared/ui.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../app.reducer';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit , OnDestroy{
+export class LoginComponent implements OnInit{
  
 
      loginForm: FormGroup;
-     isLoading = false;
+     isLoading$: Observable<boolean>;
      private loadingSubs: Subscription;
 
-  constructor(private authService: AuthService, private uiService: UIService) { }
+  constructor(private authService: AuthService, private uiService: UIService, private store: Store<{ui: fromApp.State}>) { }
 
   ngOnInit(): void {
-    this.loadingSubs = this.uiService.loadingStateChanged.subscribe(isLoadingState =>{
-      this.isLoading = isLoadingState; 
-    })
+   this.isLoading$ = this.store.pipe(map(state => state.ui.isLoading))
+   console.log(this.isLoading$);
+    // this.loadingSubs = this.uiService.loadingStateChanged.subscribe(isLoadingState =>{
+    //   this.isLoading = isLoadingState; 
+    // })
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', {validators:[Validators.required]}),
@@ -38,10 +43,10 @@ export class LoginComponent implements OnInit , OnDestroy{
   }
   get email(){return this.loginForm.get('email'); }
   get password(){ return this.loginForm.get('password');}
-ngOnDestroy(){
-  if(this.loadingSubs){
-    this.loadingSubs.unsubscribe();
-  }
+// ngOnDestroy(){
+//   if(this.loadingSubs){
+//     this.loadingSubs.unsubscribe();
+//   }
   
-}
+// }
 }

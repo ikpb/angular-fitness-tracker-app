@@ -20,6 +20,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from '././app.reducer'
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
+    StoreModule.forRoot({ui: appReducer})
     
     
   ],
